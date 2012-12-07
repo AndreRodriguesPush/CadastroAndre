@@ -13,8 +13,12 @@ public class FuncionarioDAO {
 
     Connection connection = null;
 
-    public FuncionarioDAO() throws ClassNotFoundException {
-        connection = new ConnectionFactory().getConnection();
+    public FuncionarioDAO() {
+        try {
+            connection = new ConnectionFactory().getConnection();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     public void inserirFuncionario(Funcionario funcionario) {
@@ -34,13 +38,43 @@ public class FuncionarioDAO {
         }
     }
 
+    public Boolean atualizar(Funcionario funcionario) {
+        try {
+            String sql = "update funcionario set nome = ?, cpf = ?, cargo = ?, senha = ? where id = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1,funcionario.getNome());
+            stmt.setString(2, funcionario.getCpf());
+            stmt.setString(3, funcionario.getCargo());
+            stmt.setString(4, funcionario.getSenha());
+            stmt.setInt(5, funcionario.getId());
+            stmt.execute();
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public Boolean remover(Funcionario funcionario) {
+        try {
+            String sql = "delete from funcionario where id = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setInt(1, funcionario.getId());
+            stmt.execute();
+            stmt.close();
+            return true;
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
     public List getFuncionarios() {
         try {
             List<Funcionario> funcionarios = new ArrayList();
             String sql = "select * from funcionario";
             PreparedStatement stmt = connection.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Funcionario funcionario = new Funcionario();
                 funcionario.setId(rs.getInt("id"));
                 funcionario.setNome(rs.getString("nome"));
@@ -56,15 +90,15 @@ public class FuncionarioDAO {
             throw new RuntimeException(e.getMessage());
         }
     }
-    
-    public List getFuncionario(Funcionario funcionario){
-        try{
+
+    public List getFuncionario(Funcionario funcionario) {
+        try {
             List<Funcionario> funcionarios = new ArrayList();
             String sql = "select * from funcionarios where like ?";
             PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setString(1,funcionario.getNome());
+            stmt.setString(1, funcionario.getNome());
             ResultSet rs = stmt.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 Funcionario func = new Funcionario();
                 func.setId(rs.getInt("id"));
                 func.setNome(rs.getString("nome"));
@@ -76,7 +110,30 @@ public class FuncionarioDAO {
             rs.close();
             stmt.close();
             return funcionarios;
-        }catch(SQLException e){
+        } catch (SQLException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    public Funcionario Login(Funcionario funcionario) {
+        try {
+            String sql = "select * from funcionario where email = ? and senha = ?";
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, funcionario.getEmail());
+            stmt.setString(2, funcionario.getSenha());
+            ResultSet rs = stmt.executeQuery();
+            Funcionario func = new Funcionario();
+            while (rs.next()) {
+                func.setId(rs.getInt("id"));
+                func.setNome(rs.getString("nome"));
+                func.setCargo(rs.getString("cargo"));
+                func.setCpf(rs.getString("cpf"));
+                func.setSenha(rs.getString("senha"));
+            }
+            rs.close();
+            stmt.close();
+            return func;
+        } catch (SQLException e) {
             throw new RuntimeException(e.getMessage());
         }
     }

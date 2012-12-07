@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -11,31 +12,29 @@
     <body>
         <div class="container">
             <div class="row">
-                <form name="cadastro" id="cadastro" method="post" action="funcionarios" class="form-horizontal">
+                <form name="alterar" id="alterar" method="post" action="mvc" class="form-horizontal">
                     <div class="control-group">
                         <label class="control-label" for="nome">Nome</label>
                         <div class="controls">
-                            <input type="text" name="nome" id="nome">
+                            <input type="text" name="nome" id="nome" value="${param.nome}">
                         </div>
                     </div>
-                    
-                    <div class="control-group">
-                        <label class="control-label" for="email">Email</label>
-                        <div class="controls">
-                            <input type="email" name="email" id="email">
-                        </div>
-                    </div>
-                    
                     <div class="control-group">
                         <label class="control-label" for="cargo">Cargo</label>
                         <div class="controls">
-                            <input type="text" name="cargo" id="cargo">
+                            <input type="text" name="cargo" id="cargo" value="${param.cargo}">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="email">Email</label>
+                        <div class="controls">
+                            <input type="email" name="email" id="email" value="${param.email}">
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label" for="cpf">CPF</label>
                         <div class="controls">
-                            <input type="text" name="cpf" id="cpf">
+                            <input type="text" name="cpf" id="cpf" value="${param.cpf}">
                         </div>
                     </div>
                     <div class="control-group">
@@ -54,8 +53,8 @@
                         <label class="control-label">Perfil</label>
                         <div class="controls">
                             <select>
-                                <option name="perfil" value="administrador">Administrador</option>
-                                <option name="perfil" value="usuario">Usuario</option>
+                                <option name="perfil" value="${param.perfil}">Administrador</option>
+                                <option name="perfil" value="${param.perfil}">Usuario</option>
                             </select>
                         </div>
                     </div>
@@ -64,6 +63,8 @@
                             <input type="submit" id="salvar" value="Salvar" class="btn btn-success">
                         </div>
                     </div>
+                    <input type="hidden" name="id" value="${param.id}">
+                    <input type="hidden" name="logica" value="AlterarFuncionarioLogic">
                 </form>
             </div>
         </div>

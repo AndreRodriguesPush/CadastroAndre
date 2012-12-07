@@ -6,6 +6,8 @@ public class Funcionario {
     private String cpf;
     private String cargo;
     private String senha;
+    private String email;
+    private String perfil;
 
     /**
      * @return the nome
@@ -75,5 +77,33 @@ public class Funcionario {
      */
     public void setId(int id) {
         this.id = id;
+    }
+
+    /**
+     * @return the email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the email to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @return the perfil
+     */
+    public String getPerfil() {
+        return perfil;
+    }
+
+    /**
+     * @param perfil the perfil to set
+     */
+    public void setPerfil(String perfil) {
+        this.perfil = perfil;
     }
 }

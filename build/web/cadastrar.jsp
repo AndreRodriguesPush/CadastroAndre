@@ -3,9 +3,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastro</title>
+        <title>Cadastro de Funcionário</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
         <link href="css/bootstrap-responsive.css" rel="stylesheet" type="text/css">
+        <link href="css/style.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div class="container">
@@ -17,6 +18,14 @@
                             <input type="text" name="nome" id="nome">
                         </div>
                     </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label" for="email">Email</label>
+                        <div class="controls">
+                            <input type="email" name="email" id="email">
+                        </div>
+                    </div>
+                    
                     <div class="control-group">
                         <label class="control-label" for="cargo">Cargo</label>
                         <div class="controls">
@@ -36,9 +45,18 @@
                         </div>
                     </div>
                     <div class="control-group">
-                        <label class="control-label" for="confsenha">Digite novamente a senha</label>
+                        <label class="control-label" for="confsenha">Repita a senha</label>
                         <div class="controls">
                             <input type="password" name="confsenha" id="confsenha">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Perfil</label>
+                        <div class="controls">
+                            <select>
+                                <option name="perfil" value="administrador">Administrador</option>
+                                <option name="perfil" value="usuario">Usuario</option>
+                            </select>
                         </div>
                     </div>
                     <div class="control-group">
