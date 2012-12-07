@@ -21,15 +21,17 @@ public class FuncionarioDAO {
         }
     }
 
-    public void inserirFuncionario(Funcionario funcionario) {
+    public void inserir(Funcionario funcionario) {
         try {
-            String sql = "insert into funcionario (nome, cpf, cargo, senha) values (?,?,?,?)";
+            String sql = "insert into funcionario (nome, cpf, cargo, senha, email, perfil) values (?,?,?,?,?,?)";
             PreparedStatement stmt = connection.prepareStatement(sql);
             stmt.setString(1, funcionario.getNome());
             stmt.setString(2, funcionario.getCpf());
             stmt.setString(3, funcionario.getCargo());
             stmt.setString(4, funcionario.getSenha());
-
+            stmt.setString(5, funcionario.getEmail());
+            stmt.setString(6, funcionario.getPerfil());
+            
             stmt.execute();
             stmt.close();
             System.out.println("Gravado com sucesso!");
